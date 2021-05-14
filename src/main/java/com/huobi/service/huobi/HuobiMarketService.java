@@ -122,7 +122,7 @@ public class HuobiMarketService implements MarketClient {
   }
 
   @Override
-  public void subCandlestick(SubCandlestickRequest request, ResponseCallback<CandlestickEvent> callback) {
+  public HuobiWebSocketConnection subCandlestick(SubCandlestickRequest request, ResponseCallback<CandlestickEvent> callback) {
 
     // 检查参数
     InputChecker.checker()
@@ -148,7 +148,9 @@ public class HuobiMarketService implements MarketClient {
       commandList.add(command.toJSONString());
     });
 
-    HuobiWebSocketConnection.createMarketConnection(options, commandList, new CandlestickEventParser(), callback, false);
+    HuobiWebSocketConnection marketConnection =
+            HuobiWebSocketConnection.createMarketConnection(options, commandList, new CandlestickEventParser(), callback, false);
+    return marketConnection;
   }
 
   @Override

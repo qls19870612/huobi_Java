@@ -60,7 +60,7 @@ public interface MarketClient {
 
   List<MarketTrade> getMarketHistoryTrade(MarketHistoryTradeRequest request);
 
-  void subCandlestick(SubCandlestickRequest request, ResponseCallback<CandlestickEvent> callback);
+  HuobiWebSocketConnection subCandlestick(SubCandlestickRequest request, ResponseCallback<CandlestickEvent> callback);
 
   void subMarketDetail(SubMarketDetailRequest request, ResponseCallback<MarketDetailEvent> callback);
 
