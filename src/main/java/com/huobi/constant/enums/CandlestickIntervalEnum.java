@@ -16,7 +16,7 @@ public enum CandlestickIntervalEnum {
   WEEK1("1week"),
   YEAR1("1year");
 
-  private final String code;
+  public final String code;
 
   CandlestickIntervalEnum(String code) {
     this.code = code;

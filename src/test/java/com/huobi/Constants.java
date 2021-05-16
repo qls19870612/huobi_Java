@@ -1,7 +1,13 @@
 package com.huobi;
 
-public class Constants {
+import com.huobi.config.ConfigLoader;
 
-  public static final String API_KEY = "api key";
-  public static final String SECRET_KEY = "secret key";
+public class Constants {
+  public static String API_KEY = "";
+  public static String SECRET_KEY = "";
+  static{
+    API_KEY = ConfigLoader.getString("your_api_key");
+    SECRET_KEY = ConfigLoader.getString("your_secret");
+  }
+
 }

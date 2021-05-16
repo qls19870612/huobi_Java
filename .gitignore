@@ -3,3 +3,9 @@ logs/
 target
 *.iml
 *.tmp
+logs_huobi/
+src/main/resources/config.properties
+
+
+
+
