@@ -335,6 +335,7 @@ public class HuobiWebSocketConnection extends WebSocketListener implements WebSo
     log.error("[Connection close][" + this.getId() + "] Closing normally");
     if (webSocket != null) {
       webSocket.cancel();
+      webSocket.close(1000,"1111111111");
       webSocket = null;
     }
     WebSocketWatchDog.onClosedNormally(this);
