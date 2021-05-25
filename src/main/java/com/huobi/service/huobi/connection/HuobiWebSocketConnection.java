@@ -237,19 +237,20 @@ public class HuobiWebSocketConnection extends WebSocketListener implements WebSo
   @Override
   public void onMessage(WebSocket webSocket, ByteString bytes) {
     super.onMessage(webSocket, bytes);
+    lastReceivedTime = System.currentTimeMillis();
+    String data;
+    try {
+      data = new String(InternalUtils.decode(bytes.toByteArray()));
+    } catch (IOException e) {
+      log.error("[Connection On Message][" + this.getId() + "] Receive message error: " + e.getMessage());
+      closeOnError();
+      return;
+    }
+
     try {
 
-      lastReceivedTime = System.currentTimeMillis();
 
-      String data;
-      try {
-        data = new String(InternalUtils.decode(bytes.toByteArray()));
-      } catch (IOException e) {
-        log.error("[Connection On Message][" + this.getId() + "] Receive message error: " + e.getMessage());
-        closeOnError();
-        return;
-      }
-      log.debug("[Connection On Message][{}] {}", this.getId(), data);
+
       JSONObject jsonObject = JSON.parseObject(data);
 
       if (jsonObject.containsKey("status") && !"ok".equals(jsonObject.getString("status"))) {
@@ -276,6 +277,7 @@ public class HuobiWebSocketConnection extends WebSocketListener implements WebSo
       } else if (jsonObject.containsKey("subbed")) {
       }
     } catch (Exception e) {
+      log.error("onMessage data:{}", data);
       log.error("[Connection On Message][" + this.getId() + "] Unexpected error: " + e.getMessage());
       closeOnError();
     }

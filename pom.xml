@@ -68,6 +68,12 @@
       <artifactId>googleauth</artifactId>
       <version>1.2.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
 
 
   </dependencies>

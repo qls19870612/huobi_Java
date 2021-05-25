@@ -14,7 +14,7 @@ import com.huobi.constant.enums.ConnectionStateEnum;
 
 
 public class WebSocketWatchDog {
-
+  private static final Logger logger = LoggerFactory.getLogger(WebSocketWatchDog.class);
   public static final long RECEIVE_LIMIT_TS = 60_000;
 
   public static final int DELAY_ON_FAILURE = 15;
@@ -58,6 +58,10 @@ public class WebSocketWatchDog {
   }
 
   public static void onClosedNormally(WebSocketConnection connection) {
-    TIME_HELPER.remove(connection);
+    WebSocketConnection remove = TIME_HELPER.remove(connection.getConnectionId());
+    if (remove == null) {
+      logger.error("onClosedNormally getConnectionId:{}", connection.getConnectionId());
+    }
+
   }
 }
